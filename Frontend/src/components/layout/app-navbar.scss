@@ -1,0 +1,89 @@
+@use '../../style/variables' as *;
+
+.app-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: $nav-height;
+    background: rgba($bg-base, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid $border;
+
+    &__inner {
+        max-width: $container-max;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: $text-primary;
+        font-weight: 700;
+        font-size: 1.05rem;
+        flex-shrink: 0;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+    }
+
+    &__name {
+        @include mobile {
+            display: none;
+        }
+    }
+
+    &__links {
+        flex: 1;
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    &__link {
+        padding: 0.5rem 0.85rem;
+        border-radius: $radius-sm;
+        text-decoration: none;
+        color: $text-secondary;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s, background 0.2s;
+
+        &:hover {
+            color: $text-primary;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        &--active {
+            color: $accent-light;
+            background: rgba($accent, 0.12);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-left: auto;
+    }
+
+    &__user {
+        font-size: 0.8rem;
+        color: $text-muted;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include mobile {
+            display: none;
+        }
+    }
+}

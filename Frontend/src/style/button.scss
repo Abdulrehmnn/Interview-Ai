@@ -1,0 +1,74 @@
+@use "./variables" as *;
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    outline: none;
+    padding: 0.65rem 1.25rem;
+    border-radius: $radius-md;
+    font-family: $font-stack;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:active {
+        transform: scale(0.97);
+    }
+
+    &--primary {
+        background: $accent-gradient;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba($accent, 0.3);
+
+        &:hover {
+            box-shadow: 0 6px 24px rgba($accent, 0.4);
+            filter: brightness(1.05);
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        color: $text-primary;
+        border: 1px solid $border-strong;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: $text-secondary;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            color: $text-primary;
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    &--lg {
+        padding: 0.85rem 1.75rem;
+        font-size: 0.95rem;
+        border-radius: $radius-lg;
+    }
+
+    &--full {
+        width: 100%;
+        padding-block: 0.8rem;
+    }
+}
+
+.highlight {
+    background: $accent-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

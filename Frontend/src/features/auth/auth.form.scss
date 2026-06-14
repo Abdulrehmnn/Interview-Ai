@@ -1,0 +1,195 @@
+@use '../../style/variables' as *;
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: $bg-base;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+
+    &__brand {
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem;
+        background: $bg-surface;
+        border-right: 1px solid $border;
+        position: relative;
+        overflow: hidden;
+
+        @include mobile {
+            display: none;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(ellipse, rgba($accent, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: $text-primary;
+        font-weight: 700;
+        font-size: 1.15rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    &__brand-content {
+        margin-top: auto;
+        position: relative;
+        z-index: 1;
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        p {
+            color: $text-secondary;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 380px;
+        }
+    }
+
+    &__features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-size: 0.9rem;
+            color: $text-secondary;
+
+            svg {
+                color: $accent-light;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    &__form-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+    }
+}
+
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &__header {
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        p {
+            color: $text-secondary;
+            font-size: 0.9rem;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+    }
+
+    &__footer {
+        text-align: center;
+        font-size: 0.875rem;
+        color: $text-secondary;
+
+        a {
+            color: $accent-light;
+            text-decoration: none;
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__back {
+        text-align: center;
+        font-size: 0.85rem;
+        color: $text-muted;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $text-primary;
+        }
+    }
+}
+
+.form-error {
+    padding: 0.75rem 1rem;
+    background: rgba($danger, 0.1);
+    border: 1px solid rgba($danger, 0.25);
+    border-radius: $radius-md;
+    color: $danger;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+
+    label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: $text-secondary;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: $bg-input;
+        border: 1px solid $border-strong;
+        border-radius: $radius-md;
+        color: $text-primary;
+        font-family: $font-stack;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &::placeholder {
+            color: $text-muted;
+        }
+
+        &:focus {
+            border-color: rgba($accent, 0.5);
+            box-shadow: 0 0 0 3px rgba($accent, 0.12);
+        }
+    }
+}
