@@ -15,10 +15,12 @@ const connectDB = require("./src/config/database")
 connectDB()
 
 // Step 1.5: Server port 3000 par listen karo — ab API requests accept karega
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
+    })
+}
 
 // Export the app for Vercel Serverless Deployment
 module.exports = app;

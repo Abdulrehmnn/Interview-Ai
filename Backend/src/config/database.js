@@ -6,7 +6,9 @@ const dns = require("dns")
 const mongoose = require("mongoose")
 
 // Step 3.1: Windows par MongoDB Atlas SRV lookup fix ke liye DNS servers set karo
-dns.setServers(["8.8.8.8", "1.1.1.1"])
+if (process.env.NODE_ENV !== "production") {
+    dns.setServers(["8.8.8.8", "1.1.1.1"])
+}
 
 async function connectDB() {
     try {
