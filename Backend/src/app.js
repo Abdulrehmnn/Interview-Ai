@@ -1,38 +1,30 @@
-const express = require("express")
-const cookieParser = require("cookie-parser")
-const cors = require("cors")
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cookieParser());
+
+// SAFE CORS (NO CRASH)
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        
-        // Allow localhost and any vercel.app domain
-        if (origin.startsWith("http://localhost") || origin.endsWith(".vercel.app") || origin === process.env.FRONTEND_URL) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
+    origin: true,
     credentials: true
-}))
+}));
 
-/* require all the routes here */
-const authRouter = require("./routes/auth.route")
-const interviewRouter = require("./routes/interview.routes")
+// ROUTES
+const authRouter = require("./routes/auth.route");
+const interviewRouter = require("./routes/interview.routes");
 
-
-/* using all the routes here */
+// HEALTH CHECK
 app.get("/", (req, res) => {
-    res.status(200).json({ status: "InterviewAI Backend is running smoothly!" })
-})
-app.use("/api/auth", authRouter)
-app.use("/api/interview", interviewRouter)
+    res.status(200).json({
+        status: "InterviewAI Backend is running smoothly!"
+    });
+});
 
+app.use("/api/auth", authRouter);
+app.use("/api/interview", interviewRouter);
 
-
-module.exports = app
+module.exports = app;

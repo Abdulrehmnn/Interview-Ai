@@ -1,30 +1,19 @@
-// ============================================================
-// STEP 3: Database Connection (server.js connectDB() call karta hai)
-// ============================================================
-
-const dns = require("dns")
-const mongoose = require("mongoose")
-
-// Step 3.1: Windows par MongoDB Atlas SRV lookup fix ke liye DNS servers set karo
-if (process.env.NODE_ENV !== "production") {
-    dns.setServers(["8.8.8.8", "1.1.1.1"])
-}
+const mongoose = require("mongoose");
 
 let isConnected = false;
 
 async function connectDB() {
-    if (isConnected) {
-        console.log("Using existing database connection");
-        return;
-    }
+    if (isConnected) return;
+
     try {
-        // Step 3.2: .env se MONGO_URI le kar MongoDB Atlas se connect karo
-        const db = await mongoose.connect(process.env.MONGO_URI)
-        isConnected = db.connections[0].readyState;
-        console.log("Connected to MongoDB")
+        await mongoose.connect(process.env.MONGO_URI);
+
+        isConnected = true;
+        console.log("Connected to MongoDB");
     } catch (error) {
-        console.error("Error connecting to MongoDB:", error)
+        console.error("MongoDB Connection Error:", error);
+        throw error;
     }
 }
 
-module.exports = connectDB
+module.exports = connectDB;
