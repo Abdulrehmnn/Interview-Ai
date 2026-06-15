@@ -57,7 +57,20 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
 
 
 async function generatePdfFromHtml(htmlContent) {
-    const browser = await puppeteer.launch()
+    let browser;
+    if (process.env.VERCEL) {
+        const chromium = require("@sparticuz/chromium");
+        const puppeteerCore = require("puppeteer-core");
+        browser = await puppeteerCore.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
+        });
+    } else {
+        browser = await puppeteer.launch();
+    }
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle0" })
 

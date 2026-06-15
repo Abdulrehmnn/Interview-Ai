@@ -10,10 +10,17 @@ if (process.env.NODE_ENV !== "production") {
     dns.setServers(["8.8.8.8", "1.1.1.1"])
 }
 
+let isConnected = false;
+
 async function connectDB() {
+    if (isConnected) {
+        console.log("Using existing database connection");
+        return;
+    }
     try {
         // Step 3.2: .env se MONGO_URI le kar MongoDB Atlas se connect karo
-        await mongoose.connect(process.env.MONGO_URI)
+        const db = await mongoose.connect(process.env.MONGO_URI)
+        isConnected = db.connections[0].readyState;
         console.log("Connected to MongoDB")
     } catch (error) {
         console.error("Error connecting to MongoDB:", error)
