@@ -27,6 +27,9 @@ const interviewRouter = require("./routes/interview.routes")
 
 
 /* using all the routes here */
+app.get("/", (req, res) => {
+    res.status(200).json({ status: "InterviewAI Backend is running smoothly!" })
+})
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
